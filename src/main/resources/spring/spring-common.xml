@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-3.1.xsd
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+    <context:annotation-config/>
+
+    <context:property-placeholder location="classpath:/application.properties,classpath:/spring/spring.properties"/>
+
+    <context:component-scan base-package="com.aimprosoft.glossary.common"/>
+
+    <context:component-scan base-package="com.aimprosoft.spring"/>
+
+    <bean name="validator" class="com.aimprosoft.spring.validation.oval.spring.SpringOvalValidator" scope="singleton">
+        <property name="validator">
+            <bean class="net.sf.oval.Validator"/>
+        </property>
+    </bean>
+
+</beans>

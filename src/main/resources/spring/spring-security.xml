@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:context="http://www.springframework.org/schema/context"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+                           http://www.springframework.org/schema/security
+                           http://www.springframework.org/schema/security/spring-security-3.1.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+    <context:component-scan base-package="com.aimprosoft.glossary.common.security"/>
+
+    <beans:bean name="securityExpressionHandler"
+            class="org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler"/>
+
+    <beans:bean name="glossaryUserDetailsService"
+                class="com.aimprosoft.glossary.common.security.GlossaryUserDetailsService"/>
+
+    <global-method-security secured-annotations="enabled" pre-post-annotations="enabled">
+        <expression-handler ref="securityExpressionHandler"/>
+    </global-method-security>
+
+    <!--Do not filter static resources-->
+    <http pattern="/html/**" security="none"/>
+
+    <!-- Closed page and Authentication filter -->
+    <http auto-config="true" use-expressions="true">
+
+        <!-- Restrict URLs based on role -->
+        <intercept-url pattern="/index.html" access="hasAnyRole('USER,ADMIN')"/>
+
+        <intercept-url pattern="/glossaries" access="hasAnyRole('USER,ADMIN')"/>
+
+        <intercept-url pattern="/glossaries/*" access="hasAnyRole('USER,ADMIN')"/>
+
+        <!--Override default login and logout pages -->
+        <form-login login-processing-url="/login" login-page="/login.html"
+                    authentication-failure-url="/login.html?error=1"
+                    default-target-url="/index.html"/>
+
+        <logout logout-url="/logout" logout-success-url="/login.html"/>
+
+        <access-denied-handler error-page="/login.html?error=1"/>
+
+    </http>
+
+    <!-- Authentication manager -->
+    <authentication-manager>
+        <authentication-provider user-service-ref="glossaryUserDetailsService"/>
+    </authentication-manager>
+
+</beans:beans>
