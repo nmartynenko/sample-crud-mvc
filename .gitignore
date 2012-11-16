@@ -1,4 +1,6 @@
+/.gradle/
 /.idea/
+/build/
 /target/
 /logs/
 /sample-crud-mvc.iml
