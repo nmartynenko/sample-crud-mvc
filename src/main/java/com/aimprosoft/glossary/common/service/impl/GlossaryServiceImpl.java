@@ -16,12 +16,16 @@ public class GlossaryServiceImpl implements GlossaryService{
     @Autowired
     private GlossaryPersistence glossaryPersistence;
 
-    public Page<Glossary> getCurrentPage(int startRow, int pageSize) {
+    public Page<Glossary> getCurrentPage(int startRow, int pageSize) throws GlossaryException {
         Pageable pageable = null;
         if (startRow >= 0 && pageSize > 0){
             pageable = new PageRequest(startRow / pageSize, pageSize);
         }
-        return glossaryPersistence.findAll(pageable);
+        try {
+            return glossaryPersistence.findAll(pageable);
+        } catch (Exception e) {
+            throw new GlossaryException(e);
+        }
     }
 
     @Override
@@ -31,21 +35,37 @@ public class GlossaryServiceImpl implements GlossaryService{
 
     @Override
     public void addGlossary(Glossary glossary) throws GlossaryException {
-        glossaryPersistence.save(glossary);
+        try {
+            glossaryPersistence.save(glossary);
+        } catch (Exception e) {
+            throw new GlossaryException(e);
+        }
     }
 
     @Override
     public void updateGlossary(Glossary glossary) throws GlossaryException {
-        glossaryPersistence.save(glossary);
+        try {
+            glossaryPersistence.save(glossary);
+        } catch (Exception e) {
+            throw new GlossaryException(e);
+        }
     }
 
     @Override
     public void removeGlossary(Glossary glossary) throws GlossaryException {
-        glossaryPersistence.delete(glossary);
+        try {
+            glossaryPersistence.delete(glossary);
+        } catch (Exception e) {
+            throw new GlossaryException(e);
+        }
     }
 
     @Override
     public void removeGlossaryById(long glossaryId) throws GlossaryException {
-        glossaryPersistence.delete(glossaryId);
+        try {
+            glossaryPersistence.delete(glossaryId);
+        } catch (Exception e) {
+            throw new GlossaryException(e);
+        }
     }
 }

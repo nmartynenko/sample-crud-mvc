@@ -26,7 +26,7 @@ public class Glossary extends BusinessModel {
     @NotEmpty(message = "sample.error.not.empty")
     //hibernate
     @Lob
-    @Column(name = "description", nullable = true)
+    @Column(name = "description", nullable = true, length = 4096)
     private String description;
 
     public String getName() {

@@ -3,9 +3,9 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/context
-       http://www.springframework.org/schema/context/spring-context-3.1.xsd
+       http://www.springframework.org/schema/context/spring-context-3.2.xsd
        http://www.springframework.org/schema/beans
-       http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+       http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
 
     <context:annotation-config/>
 
@@ -18,6 +18,15 @@
     <bean name="validator" class="com.aimprosoft.spring.validation.oval.spring.SpringOvalValidator" scope="singleton">
         <property name="validator">
             <bean class="net.sf.oval.Validator"/>
+        </property>
+    </bean>
+
+    <bean name="objectMapper" class="org.springframework.http.converter.json.JacksonObjectMapperFactoryBean" autowire="no">
+        <property name="featuresToDisable">
+            <list>
+                <value type="org.codehaus.jackson.map.SerializationConfig.Feature">FAIL_ON_EMPTY_BEANS</value>
+                <value type="org.codehaus.jackson.map.DeserializationConfig.Feature">FAIL_ON_UNKNOWN_PROPERTIES</value>
+            </list>
         </property>
     </bean>
 

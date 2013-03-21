@@ -7,7 +7,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 
 public interface GlossaryService {
 
-    Page<Glossary> getCurrentPage(int page, int pageSize);
+    Page<Glossary> getCurrentPage(int page, int pageSize) throws GlossaryException;
 
     Glossary getGlossaryById(long glossaryId) throws GlossaryException;
 

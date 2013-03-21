@@ -9,6 +9,7 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -71,6 +72,13 @@ public class GlossaryRestController extends BaseController {
 
     //EXCEPTION HANDLERS
 
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(value = {GlossaryException.class})
+    @ResponseBody
+    public String handleGlossaryException(GlossaryException e){
+        return simpleExceptionHandler(e);
+    }
+
     @ResponseStatus(HttpStatus.FORBIDDEN)
     @ExceptionHandler(value = {AccessDeniedException.class})
     @ResponseBody
@@ -99,8 +107,11 @@ public class GlossaryRestController extends BaseController {
         List<ObjectError> allErrors = errors.getAllErrors();
 
         for (ObjectError error: allErrors){
-            errorsMap.put(error.getObjectName(),
-                    messageSource.getMessage(error.getDefaultMessage(), new Object[]{error.getObjectName()}, getLocale()));
+            String objectName = (error instanceof FieldError)
+                    ? ((FieldError)error).getField()
+                    : error.getObjectName();
+            errorsMap.put(objectName,
+                    messageSource.getMessage(error.getDefaultMessage(), new Object[]{objectName}, getLocale()));
         }
 
         return errorsMap;

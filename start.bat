@@ -1,1 +1,1 @@
-cmd /c mvn compile
+cmd /c mvn compile -P start-jetty
