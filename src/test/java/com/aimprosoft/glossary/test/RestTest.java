@@ -25,7 +25,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 @ContextConfiguration(locations = {"classpath:spring/spring-common.xml",//ignore security
                                     "classpath:spring/spring-db.xml",
                                     "classpath:servlet/glossary-servlet.xml"})
-@FixMethodOrder(MethodSorters.JVM)
+@FixMethodOrder(MethodSorters.DEFAULT)
 public class RestTest {
 
     @Autowired
@@ -128,7 +128,7 @@ public class RestTest {
                 .perform(get("/glossaries/100").contentType(MediaType.APPLICATION_JSON))
                 //expect result is invalid
                 .andExpect(status().isBadRequest())
-                        //and message should contain ID of wrong value
+                //and message should contain ID of wrong value
                 .andExpect(content().string(containsString("100")));
     }
 
