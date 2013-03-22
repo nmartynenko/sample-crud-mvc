@@ -3,7 +3,6 @@ package com.aimprosoft.glossary.common.model.impl;
 import com.aimprosoft.glossary.common.model.BusinessModel;
 import net.sf.oval.constraint.NotEmpty;
 import net.sf.oval.constraint.NotNull;
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

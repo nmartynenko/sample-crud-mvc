@@ -2,7 +2,10 @@ package com.aimprosoft.glossary.servlet.controller;
 
 import com.aimprosoft.glossary.common.exception.GlossaryException;
 import com.aimprosoft.glossary.common.model.impl.Glossary;
+import com.aimprosoft.glossary.common.persistence.UserPersistence;
+import com.aimprosoft.glossary.common.service.GlossaryService;
 import com.aimprosoft.glossary.servlet.model.GlossaryList;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.AccessDeniedException;
@@ -26,6 +29,12 @@ import java.util.Map;
  */
 @Controller
 public class GlossaryRestController extends BaseController {
+
+    @Autowired
+    protected GlossaryService glossaryService;
+
+    @Autowired
+    protected UserPersistence userPersistence;
 
     @RequestMapping(value = "/glossaries",
             method = RequestMethod.GET,
@@ -69,52 +78,4 @@ public class GlossaryRestController extends BaseController {
     public void removeGlossary(@RequestParam("glossaryId") Long glossaryId) throws GlossaryException {
         glossaryService.removeGlossaryById(glossaryId);
     }
-
-    //EXCEPTION HANDLERS
-
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(value = {GlossaryException.class})
-    @ResponseBody
-    public String handleGlossaryException(GlossaryException e){
-        return simpleExceptionHandler(e);
-    }
-
-    @ResponseStatus(HttpStatus.FORBIDDEN)
-    @ExceptionHandler(value = {AccessDeniedException.class})
-    @ResponseBody
-    public String handleAccessDeniedException(AccessDeniedException e){
-        return simpleExceptionHandler(e);
-    }
-
-    @ResponseStatus(HttpStatus.UNAUTHORIZED)
-    @ExceptionHandler(value = {AuthenticationException.class})
-    @ResponseBody
-    public String handleAuthenticationException(AuthenticationException e){
-        return simpleExceptionHandler(e);
-    }
-
-    //do not pass validation
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(value = {MethodArgumentNotValidException.class})
-    @ResponseBody
-    public Object handleMethodArgumentNotValidException (MethodArgumentNotValidException  e){
-        return transformErrors(e.getBindingResult());
-    }
-
-    private Map<String, String> transformErrors(Errors errors) {
-        Map<String, String> errorsMap = new HashMap<String, String>();
-
-        List<ObjectError> allErrors = errors.getAllErrors();
-
-        for (ObjectError error: allErrors){
-            String objectName = (error instanceof FieldError)
-                    ? ((FieldError)error).getField()
-                    : error.getObjectName();
-            errorsMap.put(objectName,
-                    messageSource.getMessage(error.getDefaultMessage(), new Object[]{objectName}, getLocale()));
-        }
-
-        return errorsMap;
-    }
-
 }

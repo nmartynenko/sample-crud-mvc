@@ -21,11 +21,11 @@
         </property>
     </bean>
 
-    <bean name="objectMapper" class="org.springframework.http.converter.json.JacksonObjectMapperFactoryBean" autowire="no">
+    <bean name="objectMapper" class="org.springframework.http.converter.json.Jackson2ObjectMapperFactoryBean" autowire="no">
         <property name="featuresToDisable">
             <list>
-                <value type="org.codehaus.jackson.map.SerializationConfig.Feature">FAIL_ON_EMPTY_BEANS</value>
-                <value type="org.codehaus.jackson.map.DeserializationConfig.Feature">FAIL_ON_UNKNOWN_PROPERTIES</value>
+                <value type="com.fasterxml.jackson.databind.SerializationFeature">FAIL_ON_EMPTY_BEANS</value>
+                <value type="com.fasterxml.jackson.databind.DeserializationFeature">FAIL_ON_UNKNOWN_PROPERTIES</value>
             </list>
         </property>
     </bean>

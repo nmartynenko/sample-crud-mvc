@@ -1,9 +1,9 @@
 package com.aimprosoft.glossary.servlet.model;
 
 import com.aimprosoft.glossary.common.model.impl.Glossary;
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.annotate.JsonUnwrapped;
-import org.codehaus.jackson.map.annotate.JsonRootName;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import org.springframework.data.domain.Page;
 
 /**

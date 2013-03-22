@@ -1,7 +1,5 @@
 package com.aimprosoft.glossary.servlet.controller;
 
-import com.aimprosoft.glossary.common.persistence.UserPersistence;
-import com.aimprosoft.glossary.common.service.GlossaryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +17,6 @@ public abstract class BaseController {
 
     @Autowired
     protected MessageSource messageSource;
-
-    @Autowired
-    protected GlossaryService glossaryService;
-
-    @Autowired
-    protected UserPersistence userPersistence;
 
     protected HttpServletRequest getRequest() {
         return ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
