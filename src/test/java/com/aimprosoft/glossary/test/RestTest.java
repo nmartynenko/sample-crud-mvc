@@ -153,6 +153,7 @@ public class RestTest {
     @Test
     public void addGlossaryWithPredefinedId() throws Exception {
         Glossary glossary = new Glossary();
+        glossary.setId(2L);
         glossary.setName("Test glossary");
         glossary.setDescription("Test glossary's description");
 
@@ -239,7 +240,26 @@ public class RestTest {
         glossary.setDescription("Test glossary description");
 
         mockMvc
-                //try to update existing glossary, which contains invalid value
+                //try to update existing glossary, which contains non-existing ID
+                .perform(post("/glossaries")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(glossary))
+                )
+                //expect result is valid
+                .andExpect(status().isOk())
+                //and content is empty
+                .andExpect(content().string(""));
+    }
+
+    @Test
+    public void updateGlossaryWithNullId() throws Exception {
+        Glossary glossary = new Glossary();
+        glossary.setId(null);
+        glossary.setName("Test glossary");
+        glossary.setDescription("Test glossary description");
+
+        mockMvc
+                //try to update existing glossary, which contains null ID value
                 .perform(post("/glossaries")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(glossary))
