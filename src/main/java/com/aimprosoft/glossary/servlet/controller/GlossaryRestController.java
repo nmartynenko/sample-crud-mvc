@@ -6,21 +6,11 @@ import com.aimprosoft.glossary.common.persistence.UserPersistence;
 import com.aimprosoft.glossary.common.service.GlossaryService;
 import com.aimprosoft.glossary.servlet.model.GlossaryList;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.security.access.AccessDeniedException;
-import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.Errors;
-import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Glossaries REST-controller. It produces and consumes JSON. For "USER" role all actions are read-only.
@@ -54,6 +44,7 @@ public class GlossaryRestController extends BaseController {
         return glossaryService.getGlossaryById(id);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/glossaries",
             method = RequestMethod.PUT,
             consumes = {MediaType.APPLICATION_JSON_VALUE})
@@ -62,6 +53,7 @@ public class GlossaryRestController extends BaseController {
         glossaryService.addGlossary(glossary);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/glossaries",
             method = RequestMethod.POST,
             consumes = {MediaType.APPLICATION_JSON_VALUE})
@@ -70,12 +62,11 @@ public class GlossaryRestController extends BaseController {
         glossaryService.updateGlossary(glossary);
     }
 
-    @RequestMapping(value = "/glossaries",
-            /*method = RequestMethod.DELETE)*/
-            //only GET, POST, PUT allowed
-            method = RequestMethod.POST)
+    @PreAuthorize("hasRole('ADMIN')")
+    @RequestMapping(value = "/glossaries/{glossaryId}",
+            method = RequestMethod.DELETE)
     @ResponseBody
-    public void removeGlossary(@RequestParam("glossaryId") Long glossaryId) throws GlossaryException {
+    public void removeGlossary(@PathVariable("glossaryId") Long glossaryId) throws GlossaryException {
         glossaryService.removeGlossaryById(glossaryId);
     }
 }

@@ -23,7 +23,7 @@ public class GlossaryControllerAdvice extends BaseController {
 
     //EXCEPTION HANDLERS
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(value = {NoGlossaryFoundException.class})
+    @ExceptionHandler(value = NoGlossaryFoundException.class)
     @ResponseBody
     public String handleNoGlossaryFoundException(NoGlossaryFoundException e){
         return messageSource.getMessage("sample.error.glossary.not.found", new Object[]{e.getModelId()}, getLocale());

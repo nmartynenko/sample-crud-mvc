@@ -9,12 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HtmlController extends BaseController{
 
-    @RequestMapping("/")
-    public String welcome(){
-        return "redirect:/index.html";
-    }
-
-    @RequestMapping("index.html")
+    @RequestMapping({"/", "index.html"})
     public String index(){
         return "/index";
     }

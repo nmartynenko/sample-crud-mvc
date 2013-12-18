@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -19,7 +20,10 @@ public abstract class BaseController {
     protected MessageSource messageSource;
 
     protected HttpServletRequest getRequest() {
-        return ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
+        RequestAttributes attrs = RequestContextHolder.getRequestAttributes();
+        return attrs instanceof ServletRequestAttributes
+                ? ((ServletRequestAttributes)attrs).getRequest()
+                : null;
     }
 
     protected Locale getLocale() {

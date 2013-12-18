@@ -1,4 +1,4 @@
-package com.aimprosoft.spring.validation.oval.spring;
+package com.aimprosoft.contrib.spring.oval;
 
 import java.lang.annotation.*;
 

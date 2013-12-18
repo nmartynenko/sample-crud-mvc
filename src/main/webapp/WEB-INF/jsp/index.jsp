@@ -79,7 +79,7 @@
                     bServerSide : true,
                     bFilter : false,
                     iDisplayStart : 0,
-                    iDisplayLength : ${props.defaulPaginatorPageSize},
+                    iDisplayLength : ${props.defaultPaginatorPageSize},
                     sPaginationType : "full_numbers",
                     aoColumns : [
                         { mData: "id" ,bSortable: false},

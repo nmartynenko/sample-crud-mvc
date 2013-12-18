@@ -229,11 +229,8 @@
             var controller = this;
 
             $.ajax({
-                    url: controller.tableOpts.sAjaxSource,
-                    type: "POST",
-                    data: {
-                        glossaryId : id
-                    }
+                    url: controller.tableOpts.sAjaxSource + "/" + id,
+                    type: "DELETE"
                 })
                 .done(function(){
                     controller._dataTable.fnDraw(false);

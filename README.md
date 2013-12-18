@@ -71,12 +71,14 @@ The differences between them are in "write" abilities of Admin role.
 
 __Note__: by default, DB is In-Memory only, therefore all changes will disappear after server's stopped.
 
-### Gradle run ###
-You may also run this application as <a href="http://www.gradle.org/">Gradle</a> task with following:
-```gradle clean startJetty```
-
 ### REST testing ###
 In ```/etc``` folder of project there is [curl](http://curl.haxx.se/)-based sample of collaborating with REST-server in non-browser environment (for *nix and win platforms).
+
+### Tested with ###
+- [Jetty](http://www.eclipse.org/jetty/) embedded
+- [Jetty maven plugin](http://www.eclipse.org/jetty/documentation/current/jetty-maven-plugin.html)
+- Jetty standalone
+- [Tomcat](http://tomcat.apache.org/) standalone
 
 ### Dependencies ###
 For launching application you must to have installed:

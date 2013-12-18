@@ -3,31 +3,57 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/context
-       http://www.springframework.org/schema/context/spring-context-3.2.xsd
+       http://www.springframework.org/schema/context/spring-context.xsd
        http://www.springframework.org/schema/beans
-       http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <context:annotation-config/>
 
     <context:property-placeholder location="classpath:/application.properties,classpath:/spring/spring.properties"/>
 
-    <context:component-scan base-package="com.aimprosoft.glossary.common"/>
+    <context:component-scan base-package="com.aimprosoft.glossary.common.config"/>
 
-    <context:component-scan base-package="com.aimprosoft.spring"/>
+    <context:component-scan base-package="com.aimprosoft.glossary.common.service"/>
 
-    <bean name="validator" class="com.aimprosoft.spring.validation.oval.spring.SpringOvalValidator" scope="singleton">
-        <property name="validator">
-            <bean class="net.sf.oval.Validator"/>
+    <!--Validation-->
+    <!--configure SLF4J logging for OVal-->
+    <bean name="ovalLog" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="staticMethod" value="net.sf.oval.internal.Log.setLoggerFactory"/>
+        <property name="arguments">
+            <bean class="net.sf.oval.logging.LoggerFactorySLF4JImpl"/>
         </property>
     </bean>
 
+    <!--Setup spring injector for OVal-->
+    <bean name="ovalSpringInjector" class="net.sf.oval.integration.spring.SpringInjector"
+          depends-on="ovalLog"/>
+
+    <!--Setup Spring-aware validator-->
+    <bean name="validator" class="com.aimprosoft.contrib.spring.oval.SpringOvalValidator">
+        <property name="validator">
+            <bean class="com.aimprosoft.contrib.spring.oval.CheckInjectableValidatorFactoryBean"
+                    depends-on="ovalSpringInjector"/>
+        </property>
+    </bean>
+
+    <!--Object mapper-->
     <bean name="objectMapper" class="org.springframework.http.converter.json.Jackson2ObjectMapperFactoryBean" autowire="no">
+        <property name="dateFormat" ref="jsonDateFormat"/>
         <property name="featuresToDisable">
             <list>
                 <value type="com.fasterxml.jackson.databind.SerializationFeature">FAIL_ON_EMPTY_BEANS</value>
                 <value type="com.fasterxml.jackson.databind.DeserializationFeature">FAIL_ON_UNKNOWN_PROPERTIES</value>
             </list>
         </property>
+    </bean>
+
+    <bean name="jsonDateFormat" class="java.text.SimpleDateFormat">
+        <constructor-arg value="dd-MM-yyyy HH:mm:ss z"/>
+        <property name="timeZone" ref="gmtTimeZone"/>
+    </bean>
+
+    <bean name="gmtTimeZone" class="java.util.TimeZone" factory-method="getTimeZone">
+        <constructor-arg value="GMT"/>
     </bean>
 
 </beans>

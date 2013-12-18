@@ -1,4 +1,4 @@
-package com.aimprosoft.spring.validation.oval.spring;
+package com.aimprosoft.contrib.spring.oval;
 
 import net.sf.oval.ConstraintViolation;
 import net.sf.oval.Validator;
@@ -51,7 +51,7 @@ public class SpringOvalValidator implements org.springframework.validation.Valid
             }
 
             try {
-                Field[] fields = getFields(target);
+                List<Field> fields = getFields(target);
                 for (Field field : fields) {
                     SpringValidateNestedProperty validate = field.getAnnotation(SpringValidateNestedProperty.class);
                     if (validate != null) {
@@ -107,10 +107,8 @@ public class SpringOvalValidator implements org.springframework.validation.Valid
     }
 
     @SuppressWarnings("unchecked")
-    private Field[] getFields(Object target) {
-        Class clazz = target.getClass();
-        List<Field> fields = doGetFields(clazz);
-        return fields.toArray(new Field[fields.size()]);
+    private List<Field> getFields(Object target) {
+        return doGetFields(target.getClass());
     }
 
     @SuppressWarnings("unchecked")

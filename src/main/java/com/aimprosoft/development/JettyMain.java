@@ -1,4 +1,4 @@
-package com.aimprosoft;
+package com.aimprosoft.development;
 
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;

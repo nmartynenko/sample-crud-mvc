@@ -29,11 +29,9 @@
     <http auto-config="true" use-expressions="true">
 
         <!-- Restrict URLs based on role -->
-        <intercept-url pattern="/index.html" access="hasAnyRole('USER,ADMIN')"/>
+        <intercept-url pattern="/login.html" access="isAnonymous()"/>
 
-        <intercept-url pattern="/glossaries" access="hasAnyRole('USER,ADMIN')"/>
-
-        <intercept-url pattern="/glossaries/*" access="hasAnyRole('USER,ADMIN')"/>
+        <intercept-url pattern="/**" access="isAuthenticated()"/>
 
         <!--Override default login and logout pages -->
         <form-login login-processing-url="/login" login-page="/login.html"
@@ -46,9 +44,13 @@
 
     </http>
 
+    <beans:bean name="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+
     <!-- Authentication manager -->
     <authentication-manager>
-        <authentication-provider user-service-ref="glossaryUserDetailsService"/>
+        <authentication-provider user-service-ref="glossaryUserDetailsService">
+            <password-encoder ref="encoder"/>
+        </authentication-provider>
     </authentication-manager>
 
 </beans:beans>

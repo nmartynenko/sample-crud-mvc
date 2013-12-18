@@ -1,1 +1,2 @@
-mvn compile -P start-jetty
+#!/bin/sh
+mvn clean jetty:run

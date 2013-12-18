@@ -10,24 +10,24 @@ import org.springframework.stereotype.Service;
 public class ApplicationProps {
 
     @Value("${paginator.default.pageSize}")
-    private int defaulPaginatorPageSize;
+    private int defaultPaginatorPageSize;
 
     @Value("${paginator.default.maxPage}")
-    private int defaulPaginatorMaxPage;
+    private int defaultPaginatorMaxPage;
 
     @Value("${paginator.default.fastStep}")
-    private int defaulPaginatorFastStep;
+    private int defaultPaginatorFastStep;
 
-    public int getDefaulPaginatorPageSize() {
-        return defaulPaginatorPageSize;
+    public int getDefaultPaginatorPageSize() {
+        return defaultPaginatorPageSize;
     }
 
-    public int getDefaulPaginatorMaxPage() {
-        return defaulPaginatorMaxPage;
+    public int getDefaultPaginatorMaxPage() {
+        return defaultPaginatorMaxPage;
     }
 
-    public int getDefaulPaginatorFastStep() {
-        return defaulPaginatorFastStep;
+    public int getDefaultPaginatorFastStep() {
+        return defaultPaginatorFastStep;
     }
 
 }

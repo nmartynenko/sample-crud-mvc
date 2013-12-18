@@ -8,7 +8,7 @@ public abstract class BusinessModel implements HibernateModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", unique = true, nullable = false)
-    private Long id;
+    protected Long id;
 
     public Long getId() {
         return this.id;
