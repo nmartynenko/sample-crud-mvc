@@ -1,4 +1,4 @@
-## Sample CRUD application ##
+## Sample CRUD application ## [![Build Status](https://travis-ci.org/nmartynenko/sample-crud-mvc.png?branch=master)](https://travis-ci.org/nmartynenko/sample-crud-mvc)
 
 This is sample Java application, which is represented as:
 
