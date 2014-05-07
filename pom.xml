@@ -14,8 +14,8 @@
     <packaging>war</packaging>
 
     <properties>
-        <jdk.target>1.6</jdk.target>
-        <jdk.source>1.6</jdk.source>
+        <jdk.target>1.7</jdk.target>
+        <jdk.source>1.7</jdk.source>
         <show.deprecations>false</show.deprecations>
 
         <junit.version>4.11</junit.version>
