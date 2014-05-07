@@ -19,15 +19,17 @@ public class CreateUserListener implements InitializingBean{
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        _logger.info("Start adding sample user");
-        User user = new User();
-        user.setEmail("user@example.com");
-        user.setPassword("user");
-        user.setName("Sample User");
-        user.setRole(UserRole.USER);
+        if (userService.countByRole(UserRole.USER) == 0) {
+            _logger.info("Start adding sample user");
+            User user = new User();
+            user.setEmail("user@example.com");
+            user.setPassword("user");
+            user.setName("Sample User");
+            user.setRole(UserRole.USER);
 
-        userService.addUser(user);
+            userService.add(user);
 
-        _logger.info("Sample user has been added successfully");
+            _logger.info("Sample user has been added successfully");
+        }
     }
 }

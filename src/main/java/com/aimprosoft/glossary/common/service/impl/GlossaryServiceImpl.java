@@ -8,57 +8,44 @@ import com.aimprosoft.glossary.common.service.GlossaryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
-public class GlossaryServiceImpl implements GlossaryService{
-
-    @Autowired
-    private GlossaryPersistence glossaryPersistence;
+public class GlossaryServiceImpl extends BaseCrudServiceImpl<Glossary, GlossaryPersistence> implements GlossaryService {
 
     public Page<Glossary> getCurrentPage(int startRow, int pageSize) throws GlossaryException {
-        Pageable pageable = null;
-        if (startRow >= 0 && pageSize > 0){
-            pageable = new PageRequest(startRow / pageSize, pageSize);
-        }
         try {
-            return glossaryPersistence.findAll(pageable);
+            return super.getCurrentPage(startRow, pageSize);
         } catch (RuntimeException e) {
             throw new GlossaryException(e);
         }
     }
 
     @Override
-    public Glossary getGlossaryById(long glossaryId) throws GlossaryException {
+    public Glossary getById(Long glossaryId) throws GlossaryException {
+        Glossary glossary = persistence.findOne(glossaryId);
+
+        if (glossary == null) {
+            throw new NoGlossaryFoundException(glossaryId);
+        }
+
+        return glossary;
+    }
+
+    @Override
+    public void add(Glossary glossary) throws GlossaryException {
         try {
-            Glossary glossary = glossaryPersistence.findOne(glossaryId);
-
-            if (glossary == null){
-                throw new NoGlossaryFoundException(glossaryId);
-            }
-
-            return glossary;
+            super.add(glossary);
         } catch (RuntimeException e) {
             throw new GlossaryException(e);
         }
     }
 
     @Override
-    public void addGlossary(Glossary glossary) throws GlossaryException {
+    public void update(Glossary glossary) throws GlossaryException {
         try {
-            glossaryPersistence.save(glossary);
-        } catch (RuntimeException e) {
-            throw new GlossaryException(e);
-        }
-    }
-
-    @Override
-    public void updateGlossary(Glossary glossary) throws GlossaryException {
-        try {
-            glossaryPersistence.save(glossary);
-        } catch (EmptyResultDataAccessException e){
+            super.update(glossary);
+        } catch (EmptyResultDataAccessException e) {
             throw new NoGlossaryFoundException(e, glossary.getId());
         } catch (RuntimeException e) {
             throw new GlossaryException(e);
@@ -66,10 +53,10 @@ public class GlossaryServiceImpl implements GlossaryService{
     }
 
     @Override
-    public void removeGlossary(Glossary glossary) throws GlossaryException {
+    public void remove(Glossary glossary) throws GlossaryException {
         try {
-            glossaryPersistence.delete(glossary);
-        } catch (EmptyResultDataAccessException e){
+            super.remove(glossary);
+        } catch (EmptyResultDataAccessException e) {
             throw new NoGlossaryFoundException(e, glossary.getId());
         } catch (RuntimeException e) {
             throw new GlossaryException(e);
@@ -77,10 +64,10 @@ public class GlossaryServiceImpl implements GlossaryService{
     }
 
     @Override
-    public void removeGlossaryById(long glossaryId) throws GlossaryException {
+    public void removeById(Long glossaryId) throws GlossaryException {
         try {
-            glossaryPersistence.delete(glossaryId);
-        } catch (EmptyResultDataAccessException e){
+            super.removeById(glossaryId);
+        } catch (EmptyResultDataAccessException e) {
             throw new NoGlossaryFoundException(e, glossaryId);
         } catch (RuntimeException e) {
             throw new GlossaryException(e);

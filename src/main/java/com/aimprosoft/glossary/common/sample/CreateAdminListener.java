@@ -19,16 +19,17 @@ public class CreateAdminListener implements InitializingBean{
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        _logger.info("Start adding sample admin");
-        User user = new User();
-        user.setEmail("admin@example.com");
-        user.setPassword("admin");
-        user.setName("Sample Admin");
-        user.setRole(UserRole.ADMIN);
+        if (userService.countByRole(UserRole.ADMIN) == 0){
+            _logger.info("Start adding sample admin");
+            User user = new User();
+            user.setEmail("admin@example.com");
+            user.setPassword("admin");
+            user.setName("Sample Admin");
+            user.setRole(UserRole.ADMIN);
 
-        userService.addUser(user);
+            userService.add(user);
 
-        _logger.info("Sample admin has been added successfully");
-
+            _logger.info("Sample admin has been added successfully");
+        }
     }
 }

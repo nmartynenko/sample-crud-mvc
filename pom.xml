@@ -6,7 +6,7 @@
 
     <groupId>com.aimprosoft</groupId>
     <artifactId>sample-crud-mvc</artifactId>
-    <version>0.0.5</version>
+    <version>0.1.0</version>
 
     <name>Sample CRUD</name>
     <description>Sample CRUD</description>
@@ -25,27 +25,27 @@
         <servlet-api.version>3.1.0</servlet-api.version>
         <jsp-api.version>2.3.1</jsp-api.version>
 
-        <hibernate.version>4.2.8.Final</hibernate.version>
+        <hibernate.version>4.3.5.Final</hibernate.version>
         <hibernate.annotations.version>4.0.4.Final</hibernate.annotations.version>
         <hibernate-validator.version>5.0.1.Final</hibernate-validator.version>
-        <hsqldb.version>2.3.1</hsqldb.version>
-        <ehcache.version>2.7.4</ehcache.version>
+        <hsqldb.version>2.3.2</hsqldb.version>
+        <ehcache.version>2.8.2</ehcache.version>
         <c3p0.version>0.9.2.1</c3p0.version>
 
-        <slf4j.version>1.7.5</slf4j.version>
+        <slf4j.version>1.7.7</slf4j.version>
         <log4j.version>1.2.17</log4j.version>
 
-        <spring.framework.version>3.2.5.RELEASE</spring.framework.version>
-        <spring.security.version>3.1.4.RELEASE</spring.security.version>
-        <spring.data.core.version>1.6.2.RELEASE</spring.data.core.version>
-        <spring.data.jpa.version>1.4.2.RELEASE</spring.data.jpa.version>
+        <spring.framework.version>3.2.7.RELEASE</spring.framework.version>
+        <spring.security.version>3.1.6.RELEASE</spring.security.version>
+        <spring.data.core.version>1.7.2.RELEASE</spring.data.core.version>
+        <spring.data.jpa.version>1.5.2.RELEASE</spring.data.jpa.version>
 
         <oval.version>1.84</oval.version>
-        <jackson.version>2.3.0</jackson.version>
-        <guava.version>15.0</guava.version>
+        <jackson.version>2.3.3</jackson.version>
+        <guava.version>17.0</guava.version>
 
         <!--Container-->
-        <jetty.version>9.1.0.v20131115</jetty.version>
+        <jetty.version>9.1.4.v20140401</jetty.version>
 
         <maven.test.skip>false</maven.test.skip>
 
@@ -69,6 +69,13 @@
             <url>http://search.maven.org/remotecontent?filepath=</url>
         </repository>
     </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>sonatype mirror</id>
+            <url>http://search.maven.org/remotecontent?filepath=</url>
+        </pluginRepository>
+    </pluginRepositories>
 
     <dependencies>
         <!--Test dependencies-->

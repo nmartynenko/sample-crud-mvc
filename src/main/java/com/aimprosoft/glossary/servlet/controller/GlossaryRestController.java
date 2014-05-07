@@ -41,7 +41,7 @@ public class GlossaryRestController extends BaseController {
             produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody
     public Object getGlossary(@PathVariable Long id) throws GlossaryException {
-        return glossaryService.getGlossaryById(id);
+        return glossaryService.getById(id);
     }
 
     @PreAuthorize("hasRole('ADMIN')")
@@ -50,7 +50,7 @@ public class GlossaryRestController extends BaseController {
             consumes = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody
     public void saveGlossary(@RequestBody @Validated Glossary glossary) throws GlossaryException {
-        glossaryService.addGlossary(glossary);
+        glossaryService.add(glossary);
     }
 
     @PreAuthorize("hasRole('ADMIN')")
@@ -59,7 +59,7 @@ public class GlossaryRestController extends BaseController {
             consumes = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody
     public void updateGlossary(@RequestBody @Validated Glossary glossary) throws GlossaryException {
-        glossaryService.updateGlossary(glossary);
+        glossaryService.update(glossary);
     }
 
     @PreAuthorize("hasRole('ADMIN')")
@@ -67,6 +67,6 @@ public class GlossaryRestController extends BaseController {
             method = RequestMethod.DELETE)
     @ResponseBody
     public void removeGlossary(@PathVariable("glossaryId") Long glossaryId) throws GlossaryException {
-        glossaryService.removeGlossaryById(glossaryId);
+        glossaryService.removeById(glossaryId);
     }
 }

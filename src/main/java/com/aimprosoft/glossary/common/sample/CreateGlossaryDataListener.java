@@ -2,6 +2,7 @@ package com.aimprosoft.glossary.common.sample;
 
 import com.aimprosoft.glossary.common.model.impl.Glossary;
 import com.aimprosoft.glossary.common.persistence.GlossaryPersistence;
+import com.aimprosoft.glossary.common.service.GlossaryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
@@ -33,7 +34,7 @@ public class CreateGlossaryDataListener implements InitializingBean{
     private Logger _logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
-    private GlossaryPersistence glossaryPersistence;
+    private GlossaryService glossaryService;
 
     @Override
     public void afterPropertiesSet() throws Exception {
@@ -47,7 +48,7 @@ public class CreateGlossaryDataListener implements InitializingBean{
             glossary.setName(TITLES[i]);
             glossary.setDescription(DESCRIPTIONS[descIndex]);
 
-            glossaryPersistence.save(glossary);
+            glossaryService.add(glossary);
         }
 
 
