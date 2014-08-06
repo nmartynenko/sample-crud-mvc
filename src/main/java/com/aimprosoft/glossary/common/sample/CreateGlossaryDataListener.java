@@ -1,7 +1,6 @@
 package com.aimprosoft.glossary.common.sample;
 
 import com.aimprosoft.glossary.common.model.impl.Glossary;
-import com.aimprosoft.glossary.common.persistence.GlossaryPersistence;
 import com.aimprosoft.glossary.common.service.GlossaryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

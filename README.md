@@ -25,7 +25,7 @@ Here is stack of Java-based technologies:
 
 - [Jackson](http://jackson.codehaus.org/) &mdash; Java JSON processor;
 
-- [slf4j](http://www.slf4j.org/) &mdash; Logger facade (with [log4j](http://logging.apache.org/log4j/) adapter);
+- [slf4j](http://www.slf4j.org/) &mdash; Logger facade (with [log4j 2](http://logging.apache.org/log4j/2.x/) adapter);
 
 And things, which may be presented, but not be used.
 
@@ -78,14 +78,17 @@ In ```/etc``` folder of project there is [curl](http://curl.haxx.se/)-based samp
 - [Jetty](http://www.eclipse.org/jetty/) embedded
 - [Jetty maven plugin](http://www.eclipse.org/jetty/documentation/current/jetty-maven-plugin.html)
 - Jetty standalone
-- [Tomcat](http://tomcat.apache.org/) standalone
+- [Tomcat](http://tomcat.apache.org/) embedded (6/7)
+- Tomcat standalone
 
 ### Dependencies ###
 For launching application you must to have installed:
 
-- <a href="http://www.oracle.com/technetwork/java/index.html">Java</a> with exposed JAVA_HOME env variable
+- <a href="http://www.oracle.com/technetwork/java/index.html">Java</a> with exposed ```JAVA_HOME``` env variable
 
 - <a href="http://maven.apache.org/">Maven</a> with exposed ```mvn``` executable
+
+- Internet connection (at least all necessary artifacts must be present)
 
 ### Known Issues ###
 This application is for training purposes of technologies listed above.

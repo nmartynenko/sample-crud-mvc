@@ -5,7 +5,6 @@ import com.aimprosoft.glossary.common.exception.NoGlossaryFoundException;
 import com.aimprosoft.glossary.common.model.impl.Glossary;
 import com.aimprosoft.glossary.common.persistence.GlossaryPersistence;
 import com.aimprosoft.glossary.common.service.GlossaryService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;

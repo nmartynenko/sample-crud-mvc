@@ -8,7 +8,6 @@ import com.aimprosoft.glossary.servlet.model.GlossaryList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
  *
  * @see com.aimprosoft.glossary.common.service.GlossaryService
  */
-@Controller
+@RestController
 public class GlossaryRestController extends BaseController {
 
     @Autowired
@@ -29,7 +28,6 @@ public class GlossaryRestController extends BaseController {
     @RequestMapping(value = "/glossaries",
             method = RequestMethod.GET,
             produces = {MediaType.APPLICATION_JSON_VALUE})
-    @ResponseBody
     public Object getGlossaries(@RequestParam(value = "startRow", required = false, defaultValue = "0") Integer startRow,
                                 @RequestParam(value = "pageSize", required = false, defaultValue = "0") Integer pageSize)
             throws GlossaryException {
@@ -39,7 +37,6 @@ public class GlossaryRestController extends BaseController {
     @RequestMapping(value = "/glossaries/{id}",
             method = RequestMethod.GET,
             produces = {MediaType.APPLICATION_JSON_VALUE})
-    @ResponseBody
     public Object getGlossary(@PathVariable Long id) throws GlossaryException {
         return glossaryService.getById(id);
     }
@@ -48,7 +45,6 @@ public class GlossaryRestController extends BaseController {
     @RequestMapping(value = "/glossaries",
             method = RequestMethod.PUT,
             consumes = {MediaType.APPLICATION_JSON_VALUE})
-    @ResponseBody
     public void saveGlossary(@RequestBody @Validated Glossary glossary) throws GlossaryException {
         glossaryService.add(glossary);
     }
@@ -57,7 +53,6 @@ public class GlossaryRestController extends BaseController {
     @RequestMapping(value = "/glossaries",
             method = RequestMethod.POST,
             consumes = {MediaType.APPLICATION_JSON_VALUE})
-    @ResponseBody
     public void updateGlossary(@RequestBody @Validated Glossary glossary) throws GlossaryException {
         glossaryService.update(glossary);
     }
@@ -65,7 +60,6 @@ public class GlossaryRestController extends BaseController {
     @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/glossaries/{glossaryId}",
             method = RequestMethod.DELETE)
-    @ResponseBody
     public void removeGlossary(@PathVariable("glossaryId") Long glossaryId) throws GlossaryException {
         glossaryService.removeById(glossaryId);
     }
