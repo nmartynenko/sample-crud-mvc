@@ -1,6 +1,9 @@
-/.gradle/
-/.idea/
-/build/
-/target/
-/logs/
-/sample-crud-mvc.iml
+.*
+!.git*
+!.travis.yml
+.idea
+build
+target
+logs
+out
+*.iml

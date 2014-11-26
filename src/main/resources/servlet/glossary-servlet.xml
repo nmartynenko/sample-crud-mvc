@@ -10,6 +10,8 @@
        http://www.springframework.org/schema/mvc
        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
+    <context:property-placeholder location="classpath:/application.properties,classpath:/spring/spring.properties"/>
+
     <mvc:annotation-driven validator="validator">
         <mvc:argument-resolvers>
             <bean class="org.springframework.data.web.PageableHandlerMethodArgumentResolver"/>
@@ -66,7 +68,7 @@
 
     <!--Locale resolver-->
     <bean name="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
-        <property name="defaultLocale" value="en"/>
+        <property name="defaultLocale" value="${default.locale}"/>
     </bean>
 
 </beans>
