@@ -24,7 +24,7 @@ public class User extends BusinessModel {
     @NotNull
     @NotEmpty
     //hibernate
-    @Column(name = "password", nullable = false, unique = true)
+    @Column(name = "password", nullable = false)
     private String password;
 
     //validation
