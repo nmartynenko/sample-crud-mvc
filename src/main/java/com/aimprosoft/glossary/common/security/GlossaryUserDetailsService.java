@@ -25,7 +25,7 @@ public class GlossaryUserDetailsService implements UserDetailsService{
         User user = userService.getUserByEmail(username);
 
         if (user == null){
-            return null;
+            throw new UsernameNotFoundException("User not found: " + username);
         }
 
         GlossaryUserDetails userDetails = new GlossaryUserDetails(
