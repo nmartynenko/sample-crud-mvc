@@ -37,7 +37,7 @@ Here is a stack of Javascript-based technologies:
 
 - [Datatables](http://datatables.net/) &mdash; jQuery-based tables plugin;
 
-- [jQuery Validation plugin](http://bassistance.de/jquery-plugins/jquery-plugin-validation/) &mdash; clien-side from validation;
+- [jQuery Validation plugin](http://bassistance.de/jquery-plugins/jquery-plugin-validation/) &mdash; client-side form validation.
 
 - [HandlebarsJS](http://handlebarsjs.com/) &mdash; [Mustache](http://mustache.github.com/)-like template engine with pre-compilation;
 
