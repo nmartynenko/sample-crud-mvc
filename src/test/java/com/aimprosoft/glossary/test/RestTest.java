@@ -110,7 +110,7 @@ public class RestTest extends BaseTest{
         assertThat(glossaryPersistence.exists(id), is(true));
 
         mockMvc
-                //call glossaries list with incorrect parameters
+                //call existing glossary by ID
                 .perform(get("/glossaries/" + id).contentType(MediaType.APPLICATION_JSON))
                 //expect result is valid
                 .andExpect(status().isOk())
@@ -129,7 +129,7 @@ public class RestTest extends BaseTest{
         assertThat(glossaryPersistence.exists(id), is(false));
 
         mockMvc
-                //call glossaries list with incorrect parameters
+                //call non-existing glossary by ID
                 .perform(get("/glossaries/" + id).contentType(MediaType.APPLICATION_JSON))
                 //expect result is invalid
                 .andExpect(status().isBadRequest())
