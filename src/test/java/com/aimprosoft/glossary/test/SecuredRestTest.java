@@ -64,7 +64,7 @@ public class SecuredRestTest extends BaseTest {
 
         mockMvc
                 //try to add new glossary
-                .perform(post("/glossaries")
+                .perform(put("/glossaries")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(glossary)))
                         //expect result is forbidden
@@ -88,7 +88,7 @@ public class SecuredRestTest extends BaseTest {
 
         mockMvc
                 //try to add new glossary
-                .perform(post("/glossaries")
+                .perform(put("/glossaries")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(glossary)))
                         //expect result is valid
